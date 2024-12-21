@@ -1,0 +1,54 @@
+public class ContactTriggerHandler
+{
+  List<Contact> triggernew;
+  List<Contact> triggerold;
+  Map<Id,Contact> triggeroldmap;
+  Map<Id,Contact> triggernewmap;
+    
+  Public ContactTriggerHandler()
+  {
+   triggernew = (List<Contact>)trigger.new;
+   triggerold = (List<Contact>)trigger.old;
+   triggernewmap = (Map<Id,Contact>)trigger.newmap;
+   triggeroldmap = (Map<id,Contact>)trigger.oldmap;
+  }
+  Public Void doAction()
+  {
+   Switch On Trigger.Operationtype
+   {
+     WHEN AFTER_UPDATE
+     {
+      updatedescriptionToAccount();   
+     }
+   }
+  }
+  Public Void updatedescriptionToAccount()
+  {
+    Map<Id,String> addconids = New Map<Id,String>();
+    for(Contact conRecord : triggernew)
+    {
+      If(conRecord.Id != Null && conRecord.Description != Null && conRecord.Department != triggeroldmap.get(conRecord.Id).Description)
+      {
+       addconids.put(conRecord.AccountId,conRecord.Description);
+      }
+    }
+   List<Account> updateToAccount = New List<Account>();
+   List<Account> accRecord = [SELECT Id,Description FROM Account WHERE Id IN : addconids.keyset()];
+   for(Account accnewRecord : accRecord)
+   {
+     accnewRecord.Description = addconids.get(accnewRecord.Id);
+     updateToAccount.add(accnewRecord);
+   }
+   try
+   {
+     if(! updateToAccount.IsEmpty())
+     {
+         Update updateToAccount;
+     }
+   }
+   Catch(Exception e)
+   {
+    system.debug(e.getMessage());
+   }
+  }
+}
