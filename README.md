@@ -1,6 +1,3 @@
-[Trigger 1: Update Related Contact Phone Fields](#trigger-1-update-related-contact-phone-fields)  
-[Trigger 2: Update Related Account Description](#trigger-2-update-related-account-description)  
-[Trigger 3: Prevent Account Duplication](#trigger-3-prevent-account-duplication)
 
 Salesforce Trigger Scenarios:
 
