@@ -1,5 +1,3 @@
-[Trigger 1: Write a trigger to update the Phone field of all related Contact records whenever the Phone field of an Account is updated.
-](https://github.com/suryasalesforcedeveloper/Apex---Trigger/edit/main/README.md) 
 
 Salesforce Trigger Scenarios:
 
