@@ -1,0 +1,75 @@
+
+trigger ContactTrigger on Contact (after insert,after update,after delete,after undelete)
+{
+   ContactTriggerHandler obj = New ContactTriggerHandler();
+   obj.doAction();
+}
+-----------------------------------------------------------------------------------------------------------------
+
+public class ContactTriggerHandler 
+{
+  List<Contact> triggernew;
+  List<Contact> triggerold;
+  Map<Id,Contact> triggeroldmap;
+  Map<Id,Contact> triggernewmap;
+   
+  Public ContactTriggerHandler()
+  {
+    triggernew =(List<Contact>)trigger.new;
+    triggerold = (List<Contact>)trigger.old;
+    triggeroldmap = (Map<Id,Contact>)trigger.oldmap;
+    triggernewmap = (Map<Id,Contact>)trigger.newmap;
+  }
+    
+ Public Void doAction()
+ {
+   Switch On trigger.Operationtype
+   {
+     When AFTER_INSERT
+     {
+      countcontactUpdateOnAccount(triggernew);   
+     }
+     When AFTER_UPDATE
+     {
+      countcontactUpdateOnAccount(triggernew);   
+     }
+     When AFTER_UNDELETE
+     {
+      countcontactUpdateOnAccount(triggernew);   
+     }
+     When AFTER_DELETE
+     {
+      countcontactUpdateOnAccount(triggerold);
+     }
+   }
+ }
+ Public Void countcontactUpdateOnAccount(List<Contact> conrecordlist)
+ {
+   Set<Id> accIds = New Set<Id>();
+   for(Contact conrecord :conrecordlist)
+   {
+    If(Trigger.IsUpdate && Conrecord.AccountId != Null &&  Conrecord.AccountId != triggeroldmap.get(conrecord.Id).AccountId)
+    {
+      accIds.add(Conrecord.AccountId);
+      accIds.add(triggeroldmap.get(conrecord.Id).AccountId);
+    }
+    else if(Conrecord.AccountId != Null)
+    {
+      accIds.add(Conrecord.AccountId);
+    }
+   }
+  List<Account> accRecordUpdate = New List<Account>();
+  List<AggregateResult> connewRecord = [SELECT AccountId,count(Id) totalcontact FROM Contact WHERE AccountId IN : accIds GROUP BY AccountId];
+  for(AggregateResult aggr : connewRecord)
+  {
+    Account accRecord = New Account();
+    accRecord.Id = (Id)aggr.get('AccountId');
+    accRecord.No_of_Contact__c =(Decimal)aggr.get('totalcontact');
+    accRecordUpdate.add(accRecord);
+  }
+  If(!accRecordUpdate.IsEmpty())
+  {
+    Update accRecordUpdate;
+  }
+ }
+}
