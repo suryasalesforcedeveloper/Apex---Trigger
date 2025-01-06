@@ -13,6 +13,15 @@ Write a trigger to prevent the creation of duplicate Account records by checking
 ## 04. Aggregate (count) - Contact:
 Write a reusable and bulk-safe Apex Trigger Handler for the Contact object to update the total number of associated contacts on the related Account whenever a Contact is inserted, updated, deleted, or undeleted. Ensure that the solution adheres to Salesforce governor limits and handles edge cases like account reassignment during updates.
 
+## 05.Aggregate (count) - Opportunity:
+Write a reusable and bulk-safe Apex Trigger Handler for the Opportunity object to update the total number of associated opportunities on the related Account whenever an Opportunity is inserted, updated, deleted, or undeleted. Ensure that the solution adheres to Salesforce governor limits and handles edge cases such as opportunities being reassigned to different accounts during updates.
+
+
+
+
+
+
+
 
 
 
