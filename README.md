@@ -16,6 +16,20 @@ Write a reusable and bulk-safe Apex Trigger Handler for the Contact object to up
 ## 05.Aggregate (count) - Opportunity:
 Write a reusable and bulk-safe Apex Trigger Handler for the Opportunity object to update the total number of associated opportunities on the related Account whenever an Opportunity is inserted, updated, deleted, or undeleted. Ensure that the solution adheres to Salesforce governor limits and handles edge cases such as opportunities being reassigned to different accounts during updates.
 
+## 06.Aggregate (Count) - Case:
+Write a reusable and bulk-safe Apex Trigger Handler for the Case object to update the total number of associated Cases on the related Account. Specifically, the No_of_Cases__c field on the Account should reflect the count of all related Cases.
+
+The trigger should handle the following scenarios:
+
+Insert: When a new Case is created.
+Update: When a Case is updated, including changes to the AccountId (e.g., reassignment of Cases to a different Account).
+Delete: When a Case is deleted.
+Undelete: When a deleted Case is restored.
+
+Ensure the solution adheres to Salesforce governor limits, processes records in bulk, and handles edge cases, such as Cases being reassigned to different Accounts during updates.
+
+
+
 
 
 
