@@ -28,6 +28,16 @@ Undelete: When a deleted Case is restored.
 
 Ensure the solution adheres to Salesforce governor limits, processes records in bulk, and handles edge cases, such as Cases being reassigned to different Accounts during updates.
 
+## 07.Limit Contact Creation for Accounts:
+
+Write a trigger handler class that ensures no more than two Contact records can be created for a given Account. If a user attempts to insert a Contact for an Account that already has two Contact records, the trigger should throw an error with an appropriate message.
+
+Requirements:
+Use a trigger handler approach to keep the logic modular and reusable.
+The trigger should operate on the BEFORE_INSERT context.
+Leverage SOQL to count existing Contact records associated with the Account.
+Provide a clear and user-friendly error message if the limit is exceeded.
+
 
 
 
