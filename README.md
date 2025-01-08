@@ -38,6 +38,8 @@ The trigger should operate on the BEFORE_INSERT context.
 Leverage SOQL to count existing Contact records associated with the Account.
 Provide a clear and user-friendly error message if the limit is exceeded.
 
+## 08 Aggregate (max) - Opportunity:
+Write a reusable and bulk-safe Apex Trigger Handler for the Opportunity object to update the Max_Opportunity_Amount__c field on the related Account whenever an Opportunity is inserted, updated, deleted, or undeleted. Ensure that the solution adheres to Salesforce governor limits and handles edge cases such as Opportunities being reassigned to different Accounts during updates.
 
 
 
